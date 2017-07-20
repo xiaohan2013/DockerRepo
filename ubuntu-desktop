@@ -1,0 +1,24 @@
+#
+# Ubuntu Desktop (LXDE) Dockerfile
+#
+# https://github.com/dockerfile/ubuntu-desktop
+#
+
+# Pull base image.
+FROM ubuntu
+
+# Install LXDE and VNC server.
+# RUN echo "deb http://mirrors.163.com/ubuntu/ wily main restricted universe multiverse" > /etc/apt/sources.list
+RUN \
+  apt-get update && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y lxde-core lxterminal tightvncserver && \
+  rm -rf /var/lib/apt/lists/*
+
+# Define working directory.
+WORKDIR /data
+
+# Define default command.
+CMD ["bash"]
+
+# Expose ports.
+EXPOSE 5901
